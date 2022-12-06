@@ -5,6 +5,11 @@ const app = express();
 app.listen(5000, () => {
   console.log("your port is listening on  5000 ");
 });
+//
+//
+//AUFGABE 1
+//
+//
 
 // na exo panta let  gt an thelo na diagrapsw kati prepei na xrisimopoihsw filter
 let kurse = ["English", "Deutsch", "Griechish"];
@@ -111,4 +116,64 @@ app.delete("/modules/:index", (req, res) => {
 
   modules = modules.filter((el, id) => id !== index);
   res.status(204).end();
+});
+
+//AUFGABE 2
+// #produkte
+// GET /produkte/     200
+// GET/produkte?category= 200
+// GET /produkte/:id  200
+
+const products = [
+  {
+    id: 1,
+    name: "laptop",
+    category: ["computer"],
+  },
+  {
+    id: 2,
+    name: "laptop",
+    category: ["x", "y"],
+  },
+  {
+    id: 3,
+    name: "laptop",
+    category: ["z"],
+  },
+];
+app.get("/produkte", (req, res) => {
+  console.log(req.method, req.url);
+
+  const category = req.query.category;
+  if (category) {
+    const filteredProduckts = products.filter(
+      (product) => product.category.includes(category)
+      // (product) => product.category === category
+    );
+    return res.json(filteredProduckts);
+  }
+  res.json(products);
+});
+// #Users
+// GET /users/:id    200
+// POST /users/      201
+// PUT /users/:id    204
+// DELETE /users/:id 204
+//
+//
+// ## Orders
+// GET /orders/    200
+// GET /orders/:id 200
+// POST /orders/   201
+// PUT /orders/:id 204
+// DELETE /orders/:id 204
+//
+//
+//
+//
+//
+//
+
+app.get("/produkte", (req, res) => {
+  res.json(modules);
 });
